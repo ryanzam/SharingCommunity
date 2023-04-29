@@ -1,251 +1,123 @@
-import Head from 'next/head'
-import clientPromise from '../lib/mongodb'
-import { InferGetServerSidePropsType } from 'next'
+import React from 'react';
+import { FcLink, FcAdvertising, FcPhoneAndroid } from "react-icons/fc";
 
-export async function getServerSideProps(context: any) {
-  try {
-    await clientPromise
-    // `await clientPromise` will use the default database passed in the MONGODB_URI
-    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-    //
-    // `const client = await clientPromise`
-    // `const db = client.db("myDatabase")`
-    //
-    // Then you can execute queries against your database like so:
-    // db.find({}) or any of the MongoDB Node Driver commands
-
-    return {
-      props: { isConnected: true },
-    }
-  } catch (e) {
-    console.error(e)
-    return {
-      props: { isConnected: false },
-    }
-  }
-}
-
-export default function Home({
-  isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home(){
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div>
+            <div className="main">
+                <div className="container-fluid ">
+                    <div className="row d-flex">
+                        <div className="col align-middle">
+                            <div className="px-2 py-2">
+                                <img src="https://img.freepik.com/free-vector/online-connection-concept-illustration_114360-4619.jpg?t=st=1682600997~exp=1682601597~hmac=dc6ef2301d66fb790a7149d19d2813c698e1cce8b6fad917b9d46874e28cba01" className="img-fluid" alt="..." />
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="px-5 py-5 mt-5">
+                                <div className="px-2 py-2 align-middle">
+                                    <h4>Share links with our clan.</h4>
+                                    <p className="lead"> An online community platform to share social media links.</p>
+                                    <p className="text-primary">Publish, Share links and Reachout to clan</p>
+                                </div>
+                                <div className="px-2 py-2">
+                                    <a href='/subscribe' className="btn btn-info">Become a clan member</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js with MongoDB!</a>
-        </h1>
+            <div className="container marketing mb-5">
+                <div className="row">
+                    <div className="col-lg-4 border-top border-bottom p-5 d-flex flex-column align-items-center">
+                        <FcLink className='icons'/>
+                        <h2 className="fw-normal">Post a link</h2>
+                        <p className="text-center">Post any links on ShareClan platform.</p>
+                    </div>
+                    <div className="col-lg-4 border-top border-bottom p-5  d-flex flex-column align-items-center">
+                        <FcAdvertising className='icons'/>
+                        <h2 className="fw-normal">We Broadcast</h2>
+                        <p className="text-center">ShareClan broadcast to clan members</p>
+                    </div>
+                    <div className="col-lg-4 border-top border-bottom p-5 d-flex flex-column align-items-center">
+                        <FcPhoneAndroid className='icons'/>
+                        <h2 className="fw-normal">Community is notified</h2>
+                        <p className="text-center">All clan members in our platform receives notification.</p>
+                    </div>
+                </div>
+            </div>     
 
-        {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
+            <div className="footer p-5 bg-primary text-light">
+                  <div className="container-fluid">
+                      <footer>
+                          <div className="">
+                              <div className="row">
+                                  <div className="col-md-6 footer-column">
+                                      <ul className="nav flex-column">
+                                          <li className="nav-item">
+                                              <span className="footer-title">Company</span>
+                                          </li>
+                                          <li className="nav-item">
+                                              <a className="nav-link" href="#">About us</a>
+                                          </li>
+                                          <li className="nav-item">
+                                              <a className="nav-link" href="#">News and articles</a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div className="col-md-6 footer-column">
+                                      <ul className="nav flex-column">
+                                          <li className="nav-item">
+                                              <span className="footer-title">Contact & Support</span>
+                                          </li>
+                                          <li className="nav-item">
+                                              <a className="nav-link" href="#"><i className="fas fa-envelope"></i>Contact us</a>
+                                          </li>
+                                          <li className="nav-item">
+                                              <a className="nav-link" href="#"><i className="fas fa-star"></i>Give feedback</a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .subtitle {
-          font-size: 2rem;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
+                              <div className="row text-center pt-5 mt-5">
+                                  <div className="col-md-4 box">
+                                      <span className="copyright quick-links">Copyright &copy; 2023, ShareCommunity </span>
+                                  </div>
+                                  <div className="col-md-4 box">
+                                      <ul className="list-inline social-buttons">
+                                          <li className="list-inline-item">
+                                              <a href="#">
+                                                  <i className="fab fa-twitter"></i>
+                                              </a>
+                                          </li>
+                                          <li className="list-inline-item">
+                                              <a href="#">
+                                                  <i className="fab fa-facebook-f"></i>
+                                              </a>
+                                          </li>
+                                          <li className="list-inline-item">
+                                              <a href="#">
+                                                  <i className="fab fa-linkedin-in"></i>
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div className="col-md-4 box">
+                                      <ul className="list-inline quick-links">
+                                          <li className="list-inline-item">
+                                              <a href="#">Privacy Policy</a>
+                                          </li>
+                                          <li className="list-inline-item">
+                                              <a href="#">Rules and Regulations</a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                    </footer>
+                </div>
+           </div>
+      </div>)
 }

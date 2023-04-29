@@ -6,10 +6,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "bootswatch": "^5.2.3",
     "mongodb": "^4.8.1",
     "next": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0"
   },
   "devDependencies": {
     "@types/node": "18.7.5",
