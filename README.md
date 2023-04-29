@@ -2,9 +2,9 @@
 
 #### An online community based app for sharing content with community members
 
-### Frameworks and languages used
+#### Frameworks and languages used
 #### NEXT.JS, React, TS
 
-### set up
+## set up
 #### npm install
 #### npm run dev
