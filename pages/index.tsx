@@ -1,7 +1,11 @@
 import React from 'react';
 import { FcLink, FcAdvertising, FcPhoneAndroid } from "react-icons/fc";
+import { FaFeather } from "react-icons/fa";
 
-export default function Home(){
+import { getCookie } from 'cookies-next';
+import { Badge } from 'reactstrap'
+
+export default function Home({ email }: any){
   return (
     <div>
             <div className="main">
@@ -19,9 +23,15 @@ export default function Home(){
                                     <p className="lead"> An online community platform to share social media links.</p>
                                     <p className="text-primary">Publish, Share links and Reachout to clan</p>
                                 </div>
+                                {email ?
+                                <div className="px-2 py-2">
+                                    <Badge color='secondary' className='p-3'> Welcome, <FaFeather className='fs-3'/> {email}</Badge>
+                                </div>
+                                :
                                 <div className="px-2 py-2">
                                     <a href='/subscribe' className="btn btn-info">Become a clan member</a>
                                 </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -121,3 +131,13 @@ export default function Home(){
            </div>
       </div>)
 }
+
+export async function getServerSideProps(context: any) {
+    const req = context.req
+    const res = context.res
+    var email = getCookie('email', { req, res });
+    if (email == undefined){
+        email = false;
+    }
+    return { props: {email} };
+};

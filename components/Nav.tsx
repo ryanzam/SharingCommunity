@@ -1,32 +1,58 @@
-import React from "react"
-import { FcLink, FcPlus, FcHome } from "react-icons/fc";
+import React, { useState } from 'react';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { FaHome, FaLink, FaFeatherAlt, FaSignInAlt, FaSignOutAlt, FaGhost } from "react-icons/fa";
 
-const NavBar = () => {
+import { getCookie } from 'cookies-next';
+
+export default function NavBar ({ email }: any){
+    const [collapsed, setCollapsed] = useState(true);
+
+    const toggleNavbar = () => {
+      setCollapsed(collapsed);
+    }
+
     return(
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="#">SharingClan</a>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse float-right" id="navbarColor03">
-      <ul className="navbar-nav me-auto">
-        <li className="nav-item">
-          <a className="nav-link active" href="/"><FcHome /> Home
-            <span className="visually-hidden">(current)</span>
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/posts"><FcLink /> Posts</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/create"><FcPlus /> Create</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      <header>
+      <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
+        <NavbarBrand href="/"><FaFeatherAlt /> SharingClan</NavbarBrand>
+          <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+          <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={collapsed} navbar>
+            <ul className="navbar-nav flex-grow">
+              <NavItem>
+                    <NavLink className="text-dark" href="/"><FaHome /> Home</NavLink>
+              </NavItem>
+              <NavItem>
+                    <NavLink className="text-dark" href="/posts"><FaLink /> Posts</NavLink>
+              </NavItem>
+              {
+                email
+                ?
+                <>
+                <NavItem>
+                      <NavLink className="text-dark" href="/user/dashboard"><FaGhost/> Yours</NavLink>
+                </NavItem>
+                <NavItem>
+                      <NavLink className="text-dark" href="/user/authentication"><FaSignOutAlt/> Exit clan</NavLink>
+                </NavItem>
+                </>
+                :
+                <NavItem>
+                      <NavLink className="text-dark" href="/user/signin"><FaSignInAlt/> Enter clan</NavLink>
+                </NavItem>
+            }
+          </ul>
+        </Collapse>
+      </Navbar>
+    </header>
     )
 }
 
-export default NavBar;
+export async function getServerSideProps(context: any) {
+  const req = context.req
+  const res = context.res
+  var email = getCookie('email', { req, res });
+  if (email == undefined){
+      email = false;
+  }
+  return { props: {email} };
+};

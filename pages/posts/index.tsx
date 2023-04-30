@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FcBrokenLink, FcLink } from 'react-icons/fc'
 
+import { getCookie } from 'cookies-next';
+
 interface Post{
     _id: string;
     Title: string;
@@ -9,14 +11,14 @@ interface Post{
     Published: Date;
 }
 
-export default function Posts() {
+export default function Posts({email}: any) {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
     const [clickedItemId, setClickedItemId] = useState<string>();
 
     useEffect(() => {
         async function fetchPosts() {
-            const response = await fetch('api/post/all');
+            const response = await fetch('api/post');
             const data = await response.json();
             setPosts(data);
             setLoading(false);
@@ -34,7 +36,7 @@ export default function Posts() {
         const reqOpts = {
             method: 'PUT'
         }
-        fetch('api/item?itemId=' + id, reqOpts)
+        fetch('api/post?id=' + id, reqOpts)
             .then(res => res.json());
         setClickedItemId(id);
     }
@@ -64,3 +66,14 @@ export default function Posts() {
         </div>
     )
 }
+
+
+export async function getServerSideProps(context: any) {
+    const req = context.req
+    const res = context.res
+    var email = getCookie('email', { req, res });
+    if (email == undefined){
+        email = false;
+    }
+    return { props: {email} };
+};

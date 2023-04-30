@@ -7,11 +7,17 @@
   },
   "dependencies": {
     "bootswatch": "^5.2.3",
+    "cookies": "^0.8.0",
+    "cookies-next": "^2.1.1",
     "mongodb": "^4.8.1",
     "next": "latest",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0"
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.11.0",
+    "react-toastify": "^9.1.2",
+    "reactstrap": "^9.1.9"
   },
   "devDependencies": {
     "@types/node": "18.7.5",
