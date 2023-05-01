@@ -1,6 +1,7 @@
 import Cookies from 'cookies'
 import clientPromise from "../../lib/mongodb";
 const {createHash} = require('node:crypto');
+import {deleteCookie} from "cookies-next";
 
 export default async function authenticationHandler(req, res) {
     const { method, body } = req;
@@ -21,20 +22,11 @@ export default async function authenticationHandler(req, res) {
         if (guess_hash == user.Password){
             const cookies = new Cookies(req, res)
             cookies.set('email', email)
-            res.redirect("/")
+            res.redirect("/user/dashboard");
         } else {
             res.redirect("/login?msg=Incorrect email or password")
         }
     } else {
-        res.redirect("/")
-    }
-
-    if (req.method == "GET"){
-        const cookies = new Cookies(req, res)
-        cookies.set('email')
-        res.redirect("/")
-      } 
-      else {
         res.redirect("/")
     }
 }

@@ -32,7 +32,7 @@ export default function NavBar ({ email }: any){
                       <NavLink className="text-dark" href="/user/dashboard"><FaGhost/> Yours</NavLink>
                 </NavItem>
                 <NavItem>
-                      <NavLink className="text-dark" href="/user/authentication"><FaSignOutAlt/> Exit clan</NavLink>
+                      <NavLink className="text-dark" href="/api/signout"><FaSignOutAlt/> Exit clan</NavLink>
                 </NavItem>
                 </>
                 :

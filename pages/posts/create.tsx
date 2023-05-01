@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react'
+import { getCookie } from 'cookies-next';
 
-const CreatePost = () => {
-    const [title, setTitle] = useState("");
-    const [link, setLink] = useState("");
-    const [isLinkValid, setIsLinkValid] = useState(true);
-
-    const router = useRouter();
-
-    const titleChangeHandler = (e : any) => {
-        setTitle(e.target.value)
-    }
+export default function CreatePost( {email}: any) {
+    const [link, setLink] = useState<string>("https://example.com");
+    const [isLinkValid, setIsLinkValid] = useState<boolean>(true);
 
     const linkChangeHandler = (e: any) => {
         let val = e.target.value;
@@ -30,52 +22,46 @@ const CreatePost = () => {
         }
     }
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        const reqOpts = {
-            method: 'POST',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify({
-                title,
-                link
-            })
-        }
-        fetch('api/posts/create', reqOpts)
-            .then(res => res.json())
-        toast.success("🎉 New post created.")
-        router.replace('/posts')
-    }
-
-    const disabledButton = link.length > 0 && isLinkValid ? false : true;
-
     return (
-        <>
+        <div className='container'>
             <div className="row mt-5">
                 <div className="col">
-                    <form onSubmit={handleSubmit}>
+                    <form action='/api/post' method='POST'>
                         <fieldset>
-                            <legend>Post a link to share with clan.</legend>
+                            <h2>Post a link to share with clan.</h2>
                             <div className="form-group">
                                 <label htmlFor="title" className="form-label mt-4">Title</label>
-                                <input type="text" className="form-control" id="title" placeholder="Enter title." onChange={(e) => titleChangeHandler(e)} />
+                                <input type="text" className="form-control" id="title" placeholder="Enter title." name='title'  required/>
                             </div>
                             <div className="form-group ">
                                 <label htmlFor="link" className="form-label mt-4">Link</label>
-                                <input required type="text" className={isLinkValid ? "form-control" : "form-control is-invalid"} id="link" placeholder="Enter link." onChange={(e) => linkChangeHandler(e)} />
+                                <input onChange={linkChangeHandler} type="text" className={isLinkValid ? "form-control" : "form-control is-invalid"} id="link" placeholder={link} name='link' />
                                 <div className="invalid-feedback">Sorry, that link is either invalid or insecure. Provide secure link for eg. https: //xyz.com</div>
                             </div>
                         </fieldset>
-                        <button type="submit" disabled={disabledButton} className="btn btn-primary mt-3"><i className="fa-regular fa-paper-plane fs-5"></i> Post</button>
+                        <button type="submit" className="btn btn-primary mt-3"><i className="fa-regular fa-paper-plane fs-5"></i> Post</button>
                     </form>
                 </div>
                 <div className="col-5">
                     <img src="https://img.freepik.com/free-icon/link_318-897795.jpg?size=626&ext=jpg&ga=GA1.1.1330865133.1682601001&semt=robertav1_2_sidr" alt="" />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
-export default CreatePost;
+export async function getServerSideProps(context: any) {
+    const req = context.req
+    const res = context.res
+    var email = getCookie('email', { req, res });
+    if (email == undefined){
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/user/signin"
+            }
+        }
+    }
+
+    return { props: { email } };
+};

@@ -26,11 +26,12 @@ export default async function registerHandler(req, res) {
             Username: username,
             Password: password_hash,
             Email: email,
-            Created: new Date().toUTCString()
+            Created: new Date().toUTCString(),
+            ClanCoins: 0
         }
         await db.collection("users").insertOne(bodyObject);
         const cookies = new Cookies(req, res)
-        cookies.set('username', username)
+        cookies.set('email', email);
         res.redirect("/")
     } else {
         res.redirect("/")

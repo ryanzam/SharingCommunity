@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { getCookie } from 'cookies-next';
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Alert } from 'reactstrap'
 
@@ -50,8 +49,8 @@ export default function Signin({email}: any ) {
 export async function getServerSideProps(context: any) {
     const req = context.req
     const res = context.res
-    var username = getCookie('email', { req, res });
-    if (username != undefined){
+    var email = getCookie('email', { req, res });
+    if (email != undefined){
         return {
             redirect: {
                 permanent: false,

@@ -56,8 +56,8 @@ export default function Register( {email}: any ) {
 export async function getServerSideProps(context: any) {
     const req = context.req
     const res = context.res
-    var username = getCookie('username', { req, res });
-    if (username != undefined){
+    var email = getCookie('email', { req, res });
+    if (email != undefined){
         return {
             redirect: {
                 permanent: false,
@@ -68,5 +68,5 @@ export async function getServerSideProps(context: any) {
     else {
 
     }
-    return { props: {username:false} };
+    return { props: {email:false} };
 };

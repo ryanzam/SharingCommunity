@@ -1,5 +1,6 @@
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
+import { getCookie } from 'cookies-next';
 
 export default async function postHandler (req, res) {
     try {
@@ -15,13 +16,17 @@ export default async function postHandler (req, res) {
 
         if(method == "POST")
         {
-            const session = await client.startSession();
-            const { title, link, userId } = body;
-            const newPost = { title, link, isApproved: false, postedBy, clanCoins:0 };
+            const { title, link } = body;
+            const email = getCookie("email", {req, res});
             
+            const session = await client.startSession();
+            session.startTransaction();
+            const user = await db.collection("users").findOne({"Email": email});
+            const newPost = { title, link, isApproved: false, postedBy: user, clicked: 0, published: new Date() };   
             await db.collection("items").insertOne(newPost);
-            await db.collection("users").findOne({ _id: ObjectId(userId)});       
-            await session.commitTransaction();
+            session.commitTransaction();
+            res.redirect("/user/dashboard?msg=Your post has been created.")
+            return;
         }
 
         if(method == "PUT")
