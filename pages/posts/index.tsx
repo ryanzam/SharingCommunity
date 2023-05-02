@@ -1,28 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { FcBrokenLink, FcLink } from 'react-icons/fc'
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { FcBrokenLink } from 'react-icons/fc'
 
 import { getCookie } from 'cookies-next';
 
-interface User{
-    Username: string;
-    ClanCoins: number;
-}
-
-interface Post{
-    _id: string;
-    title: string;
-    link: string;
-    isApproved: boolean;
-    postedBy: User;
-    clicked: number;
-    published: Date;
-}
+import { IPost } from '../../models/IIModels';
 
 const badgeType = ["bg-primary", "bg-secondary", "bg-warning", "bg-light", "bg-success"];
 
 export default function Posts({email}: any) {
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [posts, setPosts] = useState<IPost[]>([]);
     const [loading, setLoading] = useState(true);
     const [clickedItemId, setClickedItemId] = useState<string>();
 

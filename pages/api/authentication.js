@@ -1,7 +1,6 @@
 import Cookies from 'cookies'
 import clientPromise from "../../lib/mongodb";
 const {createHash} = require('node:crypto');
-import {deleteCookie} from "cookies-next";
 
 export default async function authenticationHandler(req, res) {
     const { method, body } = req;

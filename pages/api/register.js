@@ -1,6 +1,7 @@
 import Cookies from 'cookies'
 import clientPromise from "../../lib/mongodb";
 const {createHash} = require('node:crypto');
+import { UserType } from "../../models/IIModels";
 
 export default async function registerHandler(req, res) {
     const { method, body } = req;
@@ -27,7 +28,8 @@ export default async function registerHandler(req, res) {
             Password: password_hash,
             Email: email,
             Created: new Date().toUTCString(),
-            ClanCoins: 0
+            ClanCoins: 0,
+            UserType: UserType.Guest
         }
         await db.collection("users").insertOne(bodyObject);
         const cookies = new Cookies(req, res)

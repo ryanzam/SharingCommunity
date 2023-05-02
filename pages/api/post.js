@@ -10,7 +10,7 @@ export default async function postHandler (req, res) {
         const { method, body } = req;
 
         if(method == "GET"){
-            const posts = await db.collection("items").find({}).toArray();
+            const posts = await db.collection("items").find({"isApproved" : true}).toArray();
             res.json(posts);
         }
 
