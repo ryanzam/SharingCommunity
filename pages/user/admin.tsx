@@ -6,17 +6,26 @@ import { useRouter } from 'next/router'
 import { IPost } from '../../models/IIModels';
 import { toast } from 'react-toastify';
 
-export default function Admin({ user, posts }: any)
+export default function Admin({ user }: any)
 {
     const [visibleMsg, setVisibleMsg] = useState<boolean>(true);
+    const [posts, setPosts] = useState<IPost[]>([]);
+
     const router = useRouter();
     const { msg } = router.query
-    let userPosts: Array<IPost>;
-    userPosts = posts;
 
     useEffect(() => {
-
+        async function fetchPost(){
+            await fetchData();
+        }
+        fetchPost();
     }, [posts.length]);
+
+    const fetchData = async() => {
+        const res = await fetch("/api/postapprove");
+        const data = await res.json();
+        setPosts(data);
+    }
 
     const onDismiss = () => setVisibleMsg(false);
 
@@ -25,22 +34,23 @@ export default function Admin({ user, posts }: any)
         return <></>;
     }
 
-    const approve = (id: string) => {
+    const approve = async (id: string) => {
         const reqOpts = {
             method: 'POST',
             body: JSON.stringify({
                 id: id
             })
         }
-        fetch('/api/postapprove', reqOpts)
-            .then(res => res.json());  
+        await fetch('/api/postapprove', reqOpts)
+            .then(res => res.json());
         toast.success("The post is approved.")
+        router.reload();
     }
 
     const renderPosts = () => {
         return <>
-            {userPosts.length > 0 ? <p>You have { userPosts.length } posts pending for approval.</p> : <p>Nothing to approve.</p>}
-            {userPosts.map(p =>
+            {posts.length > 0 ? <p>You have { posts.length } posts pending for approval.</p> : <p>Nothing to approve.</p>}
+            {posts.map(p =>
                 <div className='row' key={p._id}>
                     <div className='col'>
                         <div className="card border-primary mb-3">

@@ -9,6 +9,11 @@ export default async function postApproveHandler (req, res) {
 
         const { method, body } = req;
 
+        if(method == "GET"){
+            const posts = await db.collection("items").find({"isApproved" : false}).toArray();
+            res.json(posts);
+        }
+
         if(method == "POST")
         {
             const { id } = JSON.parse(body);       
