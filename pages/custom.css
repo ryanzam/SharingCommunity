@@ -2,6 +2,10 @@ html, body, #__next {
     height: 100%;
 }
 
+.img-preview{
+    z-index: 99;
+}
+
 .marketing > div > div:hover{
     background-color: rgb(188, 188, 188);
     color: white;
