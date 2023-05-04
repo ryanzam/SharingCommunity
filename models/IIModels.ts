@@ -9,6 +9,7 @@ export interface IPost{
 }
 
 export interface IUser{
+    _id: string;
     Username: string;
     ClanCoins: number;
     UserType: UserType;

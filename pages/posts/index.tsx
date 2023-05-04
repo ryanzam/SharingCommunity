@@ -15,7 +15,6 @@ export default function Posts({email}: any) {
     const [hovering, setHovering] = useState(false);
     const [imgPreview, setImgPreview] = useState(null);
     const [imgHeightY, setImgHeightY] = useState(0);
-    const [imgPreviewLoaded, setImgPreviewLoaded] = useState(false);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPosts, setTotalPost] = useState<number>(0);
@@ -24,7 +23,6 @@ export default function Posts({email}: any) {
         let res = await fetch("http://localhost:3000/api/preview?link="+link);
         const data = await res.json();
         setImgPreview(data.image);
-        setImgPreviewLoaded(true);
         localStorage.setItem(link, data.image);
     } 
     
@@ -69,7 +67,6 @@ export default function Posts({email}: any) {
         setHovering(false);
         setImgPreviewItem(null);
         setImgPreview(null);
-        setImgPreviewLoaded(false);
     }
 
     const PreviewLink = () => {

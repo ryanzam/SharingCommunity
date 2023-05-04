@@ -34,11 +34,12 @@ export default function Admin({ user }: any)
         return <></>;
     }
 
-    const approve = async (id: string) => {
+    const approve = async (pid: string, uid: string) => {
         const reqOpts = {
             method: 'POST',
             body: JSON.stringify({
-                id: id
+                pid: pid,
+                uid: uid 
             })
         }
         await fetch('/api/postapprove', reqOpts)
@@ -57,7 +58,7 @@ export default function Admin({ user }: any)
                             <div className="card-header d-flex justify-content-between">
                                 <h5> { p.title }</h5>
                                 <ButtonGroup>
-                                    <Button color="success" onClick={() => approve(p._id)}>
+                                    <Button color="success" onClick={() => approve(p._id, p.postedBy._id)}>
                                         Approve
                                     </Button>
                                     <Button color="danger">

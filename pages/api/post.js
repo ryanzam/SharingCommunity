@@ -39,8 +39,13 @@ export default async function postHandler (req, res) {
         {
             const { id } = req.query;
             const found = await db.collection("items").findOne({ _id: ObjectId(id) });
-            found.Clicked = found.Clicked + 1;
+            found.clicked = found.Clicked + 1;
             const post = await db.collection("items").findOneAndUpdate({ _id: ObjectId(id) }, { $set: found});
+            const user = await db.collection("users").findOne({"Email": email});
+            if(user) {
+                user.ClanCoins = user.ClanCoins + 1; 
+                await db.collection("users").findOneAndUpdate({"Email": email}, { $set: user });
+            }
             res.json(post);
         }
 

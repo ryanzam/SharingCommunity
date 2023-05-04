@@ -1,6 +1,5 @@
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
-import { getCookie } from 'cookies-next';
 
 export default async function postApproveHandler (req, res) {
     try {
@@ -16,9 +15,19 @@ export default async function postApproveHandler (req, res) {
 
         if(method == "POST")
         {
-            const { id } = JSON.parse(body);       
-            await db.collection("items").findOneAndUpdate({_id : ObjectId(id)}, {$set: {isApproved: true}});
-            return;
+            const session = await client.startSession();
+            session.startTransaction();
+            const { pid, uid } = JSON.parse(body);      
+            const user = await db.collection("users").findOne({ _id: ObjectId(uid) });
+            user.ClanCoins = user.ClanCoins + 1; 
+            await db.collection("users").findOneAndUpdate({_id : ObjectId(uid)}, { $set: user });
+            
+            const approvedpost = await db.collection("items").findOne({ _id: ObjectId(pid) });
+            approvedpost.isApproved = true;
+            approvedpost.postedBy = user;
+            const updatedPost = await db.collection("items").findOneAndUpdate({_id : ObjectId(pid)}, {$set: approvedpost});
+            session.commitTransaction();
+            res.json(updatedPost);
         }
 
         if(method == "PUT")
