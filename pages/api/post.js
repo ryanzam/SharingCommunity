@@ -8,10 +8,16 @@ export default async function postHandler (req, res) {
         const db = client.db("sharingClan");
 
         const { method, body } = req;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 5;
 
         if(method == "GET"){
-            const posts = await db.collection("items").find({"isApproved" : true}).toArray();
-            res.json(posts);
+            const posts = await db.collection("items").find({"isApproved" : true})
+                            .skip((page - 1) * pagination)
+                            .limit(pagination)
+                            .toArray();
+            const totalPosts = await db.collection("items").countDocuments();
+            res.json({posts, totalPosts});
         }
 
         if(method == "POST")
