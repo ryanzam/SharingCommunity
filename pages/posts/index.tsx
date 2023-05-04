@@ -25,6 +25,7 @@ export default function Posts({email}: any) {
         const data = await res.json();
         setImgPreview(data.image);
         setImgPreviewLoaded(true);
+        localStorage.setItem(link, data.image);
     } 
     
 
@@ -72,9 +73,13 @@ export default function Posts({email}: any) {
     }
 
     const PreviewLink = () => {
-        if(!imgPreviewLoaded) {
-            handlePreviewFetch(imgPreviewItem!.link);
+        const cachedImg = localStorage.getItem(imgPreviewItem.link);
+        if(cachedImg) {
+            return <img className='img-preview' style={{position:'absolute', height: '150px', width: '250px', top: imgHeightY +'px'}} src={`data:image/jpeg;base64, ${cachedImg}`} />
         }
+        else{
+            handlePreviewFetch(imgPreviewItem!.link);
+       }
         if(!imgPreview) 
             return <div style={{position:'absolute', height: '150px', width: '250px', backgroundColor: 'white'}}>
                 <Spinner className='img-preview' style={{position:'absolute', top: imgHeightY +'px'}}/>
@@ -102,7 +107,7 @@ export default function Posts({email}: any) {
 
             {posts.map(p =>
                 <div className='row mb-1' key={p._id}>
-                    <div className='col' onMouseEnter={(e) => handleMouseEnter(e, p)} onMouseLeave={handleMouseLeave} >
+                    <div className='col'  >
                             <div className="card" >
                                 <div className="card-header d-flex justify-content-between">
                                     <h5><i className="fa-solid fa-link"></i> { p.title }</h5>
@@ -110,7 +115,7 @@ export default function Posts({email}: any) {
                                 </div>
                                 <div className="card-body">
                                     <p className="card-text d-flex justify-content-between">
-                                        <a href={p.link} onClick={() => handleClick(p._id)} target="_blank"><FcBrokenLink /> {p.link}</a>
+                                        <a onMouseEnter={(e) => handleMouseEnter(e, p)} onMouseLeave={handleMouseLeave} href={p.link} onClick={() => handleClick(p._id)} target="_blank"><FcBrokenLink /> {p.link}</a>
                                         <p>Posted on: <span className="text-muted">{new Date(p.published).toLocaleString()}</span></p>
                                     </p>
                                 </div>
