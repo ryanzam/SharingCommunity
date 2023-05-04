@@ -45,6 +45,15 @@ export default function Admin({ user }: any)
         await fetch('/api/postapprove', reqOpts)
             .then(res => res.json());
         toast.success("The post is approved.")
+    }
+
+    const approveTest = async () => {
+        const reqOpts = {
+            method: 'POST'
+        }
+        await fetch('/api/postapprove', reqOpts)
+            .then(res => res.json());
+        toast.success("The post is approved.")
         router.reload();
     }
 

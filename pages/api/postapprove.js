@@ -1,5 +1,6 @@
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
+let nodemailer = require("nodemailer");
 
 export default async function postApproveHandler (req, res) {
     try {
@@ -26,7 +27,10 @@ export default async function postApproveHandler (req, res) {
             approvedpost.isApproved = true;
             approvedpost.postedBy = user;
             const updatedPost = await db.collection("items").findOneAndUpdate({_id : ObjectId(pid)}, {$set: approvedpost});
-            session.commitTransaction();
+            session.commitTransaction();  
+            
+            const users = await db.collection("users").find({}).toArray();
+            await emailNotify(users);
             res.json(updatedPost);
         }
 
@@ -42,4 +46,35 @@ export default async function postApproveHandler (req, res) {
     } catch (error) {
         console.error(error);
     }
+}
+
+async function emailNotify(users, post) {
+    try {
+        let emailList = users.map(u => u.Email);
+
+        let emailMsg = {
+            from: '"SharingClan 👻" <sharingclan@example.com>', 
+            to: emailList.toString(), 
+            subject: "Hello ✔ New post on our clan", 
+            text: "You are notified of new post.",
+            html: `<p> is posted by ryan</p>`,
+        }
+// only for test
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
+            auth: {
+                user: 'mariane.shields54@ethereal.email',
+                pass: '59p85gFGxQMfTWECrb'
+            }
+        }); 
+
+        let info = await transporter.sendMail(emailMsg);
+        console.log("Message sent: %s", info.messageId);
+
+    }
+
+        catch(error){
+            console.log(error)
+        }
 }
