@@ -120,9 +120,6 @@ export default function Posts({email}: any) {
                     </div>
                     <div className="col-2 badge badge-pill position-relative border border-primary">
                         <h4 className='position-absolute top-50 start-50 translate-middle'>{p.postedBy.Username}</h4>
-                        <div className="position-relative py-2 px-4 text-bg-dark border border-dark rounded-pill">
-                            ClanCoins: {p.postedBy.ClanCoins} <svg width="1em" height="1em" viewBox="0 0 16 16" className="position-absolute top-100 start-50 translate-middle mt-1" fill="var(--bs-dark)" xmlns="http://www.w3.org/2000/svg"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
-                        </div>
                     </div>
                 </div>)}
 

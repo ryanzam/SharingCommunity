@@ -29,7 +29,7 @@ export default function Home({ email }: any){
                                 </div>
                                 :
                                 <div className="px-2 py-2">
-                                    <a href='/subscribe' className="btn btn-info">Become a clan member</a>
+                                    <a href='/user/register' className="btn btn-info">Become a clan member</a>
                                 </div>
                                 }
                             </div>

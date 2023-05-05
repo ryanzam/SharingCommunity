@@ -47,16 +47,6 @@ export default function Admin({ user }: any)
         toast.success("The post is approved.")
     }
 
-    const approveTest = async () => {
-        const reqOpts = {
-            method: 'POST'
-        }
-        await fetch('/api/postapprove', reqOpts)
-            .then(res => res.json());
-        toast.success("The post is approved.")
-        router.reload();
-    }
-
     const renderPosts = () => {
         return <>
             {posts.length > 0 ? <p>You have { posts.length } posts pending for approval.</p> : <p>Nothing to approve.</p>}
@@ -65,7 +55,7 @@ export default function Admin({ user }: any)
                     <div className='col'>
                         <div className="card border-primary mb-3">
                             <div className="card-header d-flex justify-content-between">
-                                <h5> { p.title }</h5>
+                                <h5> { p.title } </h5><span>PostedBy: { p.postedBy.Username }</span>
                                 <ButtonGroup>
                                     <Button color="success" onClick={() => approve(p._id, p.postedBy._id)}>
                                         Approve
