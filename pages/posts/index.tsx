@@ -4,6 +4,7 @@ import { getCookie } from 'cookies-next';
 import { IPost } from '../../models/IIModels';
 import { Spinner } from 'reactstrap';
 import PaginateComponent from '../../components/Pagination';
+import { FaFeather } from "react-icons/fa";
 
 
 export default function Posts({email}: any) {
@@ -108,7 +109,7 @@ export default function Posts({email}: any) {
                             <div className="card" >
                                 <div className="card-header d-flex justify-content-between">
                                     <h5><i className="fa-solid fa-link"></i> { p.title }</h5>
-                                    <p>Total clicks: {p.clicked}</p>
+                                    <p>Clicks: {p.clicked} </p>
                                 </div>
                                 <div className="card-body">
                                     <p className="card-text d-flex justify-content-between">
@@ -119,7 +120,7 @@ export default function Posts({email}: any) {
                             </div>
                     </div>
                     <div className="col-2 badge badge-pill position-relative border border-primary">
-                        {p.postedBy.IsVerified ? <h3 className='mt-3'>🏅</h3> : <p className='mt-3 text-secondary'>Not yet verified clan member</p>}
+                        {p.postedBy.IsVerified ? <h3 className='mt-3'><FaFeather className='text-muted' /></h3> : <p className='mt-3 text-secondary'>Unverified member</p>}
                         <h4 className='position-absolute top-50 start-50 translate-middle text-primary'> {p.postedBy.Username}</h4>
                     </div>
                 </div>)}
