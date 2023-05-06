@@ -1,6 +1,6 @@
 let nodemailer = require("nodemailer");
 
-export default async function emailNotify(users, post) {
+export async function emailNotificationToUsers(users, post) {
     try {
         let emailList = users.filter(u => u.Email != post.postedBy.Email).map(e => e.Email);
 
@@ -30,4 +30,33 @@ export default async function emailNotify(users, post) {
         catch(error){
             console.log(error)
         }
+}
+
+export async function emailVerification(user, uniqueStr) {
+    try {
+        let emailMsg = {
+            from: '"SharingClan 👻" <sharingclan7@gmail.com>', 
+            to: user, 
+            subject: "Hello new Clan member ✔ Verify your email.", 
+            text: "Please verify your email to be a clan member by clicking the link below.",
+            html: `Click <a href="http://localhost:3000/api/emailverify?us=${uniqueStr}">the link </a> to verify your email. :)</h2>`,
+        }
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASS
+            }
+        }); 
+
+        let info = await transporter.sendMail(emailMsg);
+        console.log("Message sent: %s", info.messageId);
+    }
+
+    catch(error){
+        console.log(error)
+    }
 }

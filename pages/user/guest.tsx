@@ -49,7 +49,7 @@ export default function GuestDashboard({ user, posts }: any)
                 <div className='col'>
                     <div>
                         <Alert color="info" className='d-flex justify-content-between'>
-                            <div>Welcome, { user.Username}! You have: { user.ClanCoins } ClanCoins.</div> 
+                            <div>👊, { user.Username}! You have: { user.ClanCoins } ClanCoins.</div> 
                             <a href='/posts/create' className='btn btn-primary' ><FaPlus /> Create</a>
                         </Alert>
                     </div>

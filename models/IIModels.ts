@@ -13,6 +13,7 @@ export interface IUser{
     Username: string;
     ClanCoins: number;
     UserType: UserType;
+    IsVerified: boolean;
 }
 
 export enum UserType {

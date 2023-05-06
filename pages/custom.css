@@ -2,18 +2,18 @@ html, body, #__next {
     height: 100%;
 }
 
+.carousel-item img{
+    height: 500px;
+    width: 100%;
+}
+
 .img-preview{
     z-index: 99;
 }
 
-.marketing > div > div:hover{
-    background-color: rgb(188, 188, 188);
-    color: white;
-}
-
 .marketing .icons{
     font-size: 100px;
-    
+    color: #e95420;
 }
 
 .marketing .icons:hover {

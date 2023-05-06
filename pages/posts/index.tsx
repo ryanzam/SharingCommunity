@@ -101,7 +101,7 @@ export default function Posts({email}: any) {
         <div className="posts">
            <div className="container p-2 position-relative">
            {hovering && <PreviewLink />}
-
+           {(!loading && posts.length == 0) && <h6>0 Posts found.</h6>}
             {posts.map(p =>
                 <div className='row mb-1' key={p._id}>
                     <div className='col'  >
@@ -119,7 +119,8 @@ export default function Posts({email}: any) {
                             </div>
                     </div>
                     <div className="col-2 badge badge-pill position-relative border border-primary">
-                        <h4 className='position-absolute top-50 start-50 translate-middle'>{p.postedBy.Username}</h4>
+                        {p.postedBy.IsVerified && <h3 className='mt-3'>🏅</h3>}
+                        <h4 className='position-absolute top-50 start-50 translate-middle text-primary'> {p.postedBy.Username}</h4>
                     </div>
                 </div>)}
 

@@ -1,7 +1,8 @@
-import Cookies from 'cookies'
 import clientPromise from "../../lib/mongodb";
 const {createHash} = require('node:crypto');
 import { UserType } from "../../models/IIModels";
+import { RandomString } from "../../util/randomstring";
+import { emailVerification } from "../../util/mailer";
 
 export default async function registerHandler(req, res) {
     const { method, body } = req;
@@ -23,18 +24,21 @@ export default async function registerHandler(req, res) {
             return;
         }
         const password_hash = createHash('sha256').update(password).digest('hex');
+        const uniqueStr = RandomString();
+
         const bodyObject = {
             Username: username,
             Password: password_hash,
             Email: email,
             Created: new Date().toUTCString(),
             ClanCoins: 0,
-            UserType: UserType.Guest
+            UserType: UserType.Guest,
+            UniqueStr: uniqueStr,
+            IsVerified: false
         }
         await db.collection("users").insertOne(bodyObject);
-        const cookies = new Cookies(req, res)
-        cookies.set('email', email);
-        res.redirect("/")
+        emailVerification(email, uniqueStr);
+        res.redirect("/user/signin?msg=We have sent you an email. Please check your email and verify.");
     } else {
         res.redirect("/")
     }

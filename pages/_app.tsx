@@ -1,4 +1,4 @@
-import "bootswatch/dist/cerulean/bootstrap.min.css";
+import "bootswatch/dist/united/bootstrap.min.css";
 import "./custom.css"
 import NavBar from "../components/Nav";
 import { ToastContainer } from 'react-toastify';

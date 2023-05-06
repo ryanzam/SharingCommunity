@@ -1,25 +1,26 @@
 import React from 'react';
-import { FcLink, FcAdvertising, FcPhoneAndroid } from "react-icons/fc";
-import { FaFeather } from "react-icons/fa";
+import { FaFeather, FaLink, FaBullhorn, FaMailBulk } from "react-icons/fa";
 
 import { getCookie } from 'cookies-next';
 import { Badge } from 'reactstrap'
+import SharingClanCarousel from '../components/Carousel';
 
 export default function Home({ email }: any){
   return (
     <div>
+        <SharingClanCarousel />
             <div className="main">
                 <div className="container-fluid ">
                     <div className="row d-flex">
                         <div className="col align-middle">
                             <div className="px-2 py-2">
-                                <img src="https://img.freepik.com/free-vector/online-connection-concept-illustration_114360-4619.jpg?t=st=1682600997~exp=1682601597~hmac=dc6ef2301d66fb790a7149d19d2813c698e1cce8b6fad917b9d46874e28cba01" className="img-fluid" alt="..." />
+                                <img src="https://img.freepik.com/free-vector/prehistoric-family-couple-kid-wearing-leopard-hides-cooking-food-cave-entrance-vector-illustration-ancient-people-stone-age-caveman-dinner-concept_74855-13207.jpg?w=1380&t=st=1683361384~exp=1683361984~hmac=818fea82a8dc04673e8d6ea5ca43144ca74ac6f1609c527bf5afa52fa12bb6f7" className="img-fluid" alt="..." />
                             </div>
                         </div>
                         <div className="col">
                             <div className="px-5 py-5 mt-5">
                                 <div className="px-2 py-2 align-middle">
-                                    <h4>Share links with our clan.</h4>
+                                    <h3>Share links with our clan.</h3>
                                     <p className="lead"> An online community platform to share social media links.</p>
                                     <p className="text-primary">Publish, Share links and Reachout to clan</p>
                                 </div>
@@ -29,7 +30,7 @@ export default function Home({ email }: any){
                                 </div>
                                 :
                                 <div className="px-2 py-2">
-                                    <a href='/user/register' className="btn btn-info">Become a clan member</a>
+                                    <a href='/user/register' className="btn btn-primary btn-lg">Become a clan member</a>
                                 </div>
                                 }
                             </div>
@@ -41,23 +42,23 @@ export default function Home({ email }: any){
             <div className="container marketing mb-5">
                 <div className="row">
                     <div className="col-lg-4 border-top border-bottom p-5 d-flex flex-column align-items-center">
-                        <FcLink className='icons'/>
+                        <FaLink className='icons'/>
                         <h2 className="fw-normal">Post a link</h2>
                         <p className="text-center">Post any links on ShareClan platform.</p>
                     </div>
                     <div className="col-lg-4 border-top border-bottom p-5  d-flex flex-column align-items-center">
-                        <FcAdvertising className='icons'/>
+                        <FaBullhorn className='icons'/>
                         <h2 className="fw-normal">We Broadcast</h2>
                         <p className="text-center">ShareClan broadcast to clan members</p>
                     </div>
                     <div className="col-lg-4 border-top border-bottom p-5 d-flex flex-column align-items-center">
-                        <FcPhoneAndroid className='icons'/>
+                        <FaMailBulk className='icons'/>
                         <h2 className="fw-normal">Community is notified</h2>
                         <p className="text-center">All clan members in our platform receives notification.</p>
                     </div>
                 </div>
             </div>     
-
+                                
             <div className="footer p-5 bg-primary text-light">
                   <div className="container-fluid">
                       <footer>
