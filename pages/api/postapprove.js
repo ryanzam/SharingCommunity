@@ -31,7 +31,7 @@ export default async function postApproveHandler (req, res) {
             
             const users = await db.collection("users").find({}).toArray();
             await emailNotify(users, approvedpost);
-            res.json(updatedPost);
+            res.redirect("/user/admin?msg=Post is approved.");
             return;
         }
 

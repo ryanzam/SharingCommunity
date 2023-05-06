@@ -119,7 +119,7 @@ export default function Posts({email}: any) {
                             </div>
                     </div>
                     <div className="col-2 badge badge-pill position-relative border border-primary">
-                        {p.postedBy.IsVerified && <h3 className='mt-3'>🏅</h3>}
+                        {p.postedBy.IsVerified ? <h3 className='mt-3'>🏅</h3> : <p className='mt-3 text-secondary'>Not yet verified clan member</p>}
                         <h4 className='position-absolute top-50 start-50 translate-middle text-primary'> {p.postedBy.Username}</h4>
                     </div>
                 </div>)}
