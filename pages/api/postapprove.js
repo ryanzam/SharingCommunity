@@ -1,6 +1,6 @@
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
-import emailNotify from "../../util/mailer";
+import { emailNotificationToUsers } from "../../util/mailer";
 
 export default async function postApproveHandler (req, res) {
     try {
@@ -24,14 +24,15 @@ export default async function postApproveHandler (req, res) {
             await db.collection("users").findOneAndUpdate({_id : ObjectId(uid)}, { $set: user });
             
             const approvedpost = await db.collection("items").findOne({ _id: ObjectId(pid) });
+            const updatedValues = { $set : { isApproved: true, postedBy: user}};
             approvedpost.isApproved = true;
             approvedpost.postedBy = user;
-            const updatedPost = await db.collection("items").findOneAndUpdate({_id : ObjectId(pid)}, {$set: approvedpost});
+            await db.collection("items").updateOne({_id : ObjectId(pid)}, updatedValues);
             session.commitTransaction(); 
             
             const users = await db.collection("users").find({}).toArray();
-            await emailNotify(users, approvedpost);
-            res.redirect("/user/admin?msg=Post is approved.");
+            await emailNotificationToUsers(users, approvedpost);
+            res.redirect("/user/dashboard?msg=Post is approved.");
             return;
         }
 

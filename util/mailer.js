@@ -7,7 +7,7 @@ export async function emailNotificationToUsers(users, post) {
         let emailMsg = {
             from: '"SharingClan 👻" <sharingclan@example.com>', 
             to: emailList, 
-            subject: "Hello ✔ New post on our clan", 
+            subject: "Hello Clan Member ✔ New post on our clan", 
             text: "You are notified of new post.",
             html: `<h2>"${post.title}" is posted by ${post.postedBy.Username} <a href="http://localhost:3000/posts">Check out posts</a></h2>`,
         }

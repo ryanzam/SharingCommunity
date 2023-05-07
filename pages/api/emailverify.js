@@ -14,7 +14,8 @@ export default async function emailVerificationHandler(req, res){
             await db.collection("users").findOneAndUpdate({_id : ObjectId(user._id)}, { $set: user });
             res.redirect("/user/signin?msg=Congrats! You are now a verified clan member.")
         } else {
-            res.json("User doesn't exists.")
+            res.json("User doesn't exists.");
+            return;
         }
     }
 }
