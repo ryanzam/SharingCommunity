@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "cookies": "^0.8.0",
     "cookies-next": "^2.1.1",
     "mongodb": "^4.8.1",
