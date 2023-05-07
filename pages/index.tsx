@@ -1,144 +1,220 @@
-import React from 'react';
+import React from "react";
 import { FaFeather, FaLink, FaBullhorn, FaMailBulk } from "react-icons/fa";
 
-import { getCookie } from 'cookies-next';
-import { Badge } from 'reactstrap'
-import SharingClanCarousel from '../components/Carousel';
-
-export default function Home({ email }: any){
+import { getCookie } from "cookies-next";
+import { Badge } from "reactstrap";
+import SharingClanCarousel from "../components/Carousel";
+import Image from "next/image";
+export default function Home({ email }: any) {
   return (
     <div>
-        <SharingClanCarousel />
-            <div className="main">
-                <div className="container-fluid ">
-                    <div className="row d-flex">
-                        <div className="col align-middle">
-                            <div className="px-2 py-2">
-                                <img src="https://img.freepik.com/free-vector/prehistoric-family-couple-kid-wearing-leopard-hides-cooking-food-cave-entrance-vector-illustration-ancient-people-stone-age-caveman-dinner-concept_74855-13207.jpg?w=1380&t=st=1683361384~exp=1683361984~hmac=818fea82a8dc04673e8d6ea5ca43144ca74ac6f1609c527bf5afa52fa12bb6f7" className="img-fluid" alt="..." />
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="px-5 py-5 mt-5">
-                                <div className="px-2 py-2 align-middle">
-                                    <h3>Share links with our clan.</h3>
-                                    <p className="lead"> An online community platform to share social media links.</p>
-                                    <p className="text-primary">Publish, Share links and Reachout to clan</p>
-                                </div>
-                                {email ?
-                                <div className="px-2 py-2">
-                                    <Badge color='secondary' className='p-3'> Welcome, <FaFeather className='fs-3'/> {email}</Badge>
-                                </div>
-                                :
-                                <div className="px-2 py-2">
-                                    <a href='/user/register' className="btn btn-primary btn-lg">Become a clan member</a>
-                                </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div className="main">
+        <div className="container">
+          <div className="row d-flex">
+            <div className="col align-middle">
+              <div className="px-2 py-2 mt-4 mb-4">
+                <Image
+                  src="/../public/img/index1.jpg"
+                  className="img-fluid"
+                  alt="..."
+                  width={650}
+                  height={300}
+                />
+              </div>
             </div>
-
-            <div className="container marketing mb-5">
-                <div className="row">
-                    <div className="col-lg-4 border-top border-bottom p-5 d-flex flex-column align-items-center">
-                        <FaLink className='icons'/>
-                        <h2 className="fw-normal">Post a link</h2>
-                        <p className="text-center">Post any links on ShareClan platform.</p>
-                    </div>
-                    <div className="col-lg-4 border-top border-bottom p-5  d-flex flex-column align-items-center">
-                        <FaBullhorn className='icons'/>
-                        <h2 className="fw-normal">We Broadcast</h2>
-                        <p className="text-center">ShareClan broadcast to clan members</p>
-                    </div>
-                    <div className="col-lg-4 border-top border-bottom p-5 d-flex flex-column align-items-center">
-                        <FaMailBulk className='icons'/>
-                        <h2 className="fw-normal">Community is notified</h2>
-                        <p className="text-center">All clan members in our platform receives notification.</p>
-                    </div>
+            <div className="col">
+              <div className="px-3 py-4 mt-4 mb-4 text-center">
+                <div className="px-2 py-1 align-middle ">
+                  <h2>Share links with our clan.</h2>
+                  <p className="lead pb-3">
+                    {" "}
+                    An online community platform to share social media links.
+                  </p>
+                  <p
+                    className="text-primary"
+                    style={{ ["margin-bottom" as any]: "0px" }}
+                  >
+                    Publish, Share links and Reachout to clan
+                  </p>
                 </div>
-            </div>     
-                                
-            <div className="footer p-5 bg-primary text-light">
-                  <div className="container-fluid">
-                      <footer>
-                          <div className="">
-                              <div className="row">
-                                  <div className="col-md-6 footer-column">
-                                      <ul className="nav flex-column">
-                                          <li className="nav-item">
-                                              <span className="footer-title">Company</span>
-                                          </li>
-                                          <li className="nav-item">
-                                              <a className="nav-link" href="#">About us</a>
-                                          </li>
-                                          <li className="nav-item">
-                                              <a className="nav-link" href="#">News and articles</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                                  <div className="col-md-6 footer-column">
-                                      <ul className="nav flex-column">
-                                          <li className="nav-item">
-                                              <span className="footer-title">Contact & Support</span>
-                                          </li>
-                                          <li className="nav-item">
-                                              <a className="nav-link" href="#"><i className="fas fa-envelope"></i>Contact us</a>
-                                          </li>
-                                          <li className="nav-item">
-                                              <a className="nav-link" href="#"><i className="fas fa-star"></i>Give feedback</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
+                {email ? (
+                  <div className="px-2 py-2">
+                    <Badge color="secondary" className="p-3">
+                      {" "}
+                      Welcome, <FaFeather className="fs-3" /> {email}
+                    </Badge>
+                  </div>
+                ) : (
+                  <div className="px-2 py-2">
+                    <a href="/user/register" className="btn btn-primary btn-lg">
+                      Become a clan member
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container marketing mb-5">
+        <h2 className=" text-center">How we work?</h2>
+        <div className="row text-center">
+          <div className="col-lg-4 p-5 d-flex flex-column align-items-center">
+            <FaLink className="icons" />
+            <div className=" pt-4 work-bg">
+              <h2 className="fw-normal">Post a link</h2>
+              <p className="text-center text-primary">
+                Post any links on ShareClan platform
+              </p>
+            </div>
+          </div>
+          <div className="col-lg-4 p-5  d-flex flex-column align-items-center">
+            <FaBullhorn className="icons" />
+            <div className=" pt-4 work-bg">
+              <h2 className="fw-normal">We Broadcast</h2>
+              <p className="text-center text-primary">
+                ShareClan broadcast to clan members
+              </p>
+            </div>
+          </div>
+          <div className="col-lg-4 p-5 d-flex flex-column align-items-center">
+            <FaMailBulk className="icons" />
+            <div className=" pt-4 work-bg">
+              <h2 className="fw-normal">Clan is notified</h2>
+              <p className="text-center text-primary">
+                All clan members recieves notification
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row d-flex pb-3">
+          <div className="col">
+            <h3>Featured Links</h3>
+            <table className="table mt-4">
+              <tbody>
+                <tr className="bg-color">
+                  <th scope="row">1</th>
+                  <th>Tom Raider</th>
+                  <th>Clicks: 250</th>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <th>Mandova Proche</th>
+                  <th>Clicks: 200</th>
+                </tr>
+                <tr className="bg-color">
+                  <th scope="row">3</th>
+                  <th>Samuel Randi</th>
+                  <th>Clicks: 150</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="col">
+            <Image
+              src="/../public/img/index2.jpg"
+              className="img-fluid"
+              alt="..."
+              width={650}
+              height={300}
+            />
+          </div>
+        </div>
+      </div>
 
-                              <div className="row text-center pt-5 mt-5">
-                                  <div className="col-md-4 box">
-                                      <span className="copyright quick-links">Copyright &copy; 2023, ShareCommunity </span>
-                                  </div>
-                                  <div className="col-md-4 box">
-                                      <ul className="list-inline social-buttons">
-                                          <li className="list-inline-item">
-                                              <a href="#">
-                                                  <i className="fab fa-twitter"></i>
-                                              </a>
-                                          </li>
-                                          <li className="list-inline-item">
-                                              <a href="#">
-                                                  <i className="fab fa-facebook-f"></i>
-                                              </a>
-                                          </li>
-                                          <li className="list-inline-item">
-                                              <a href="#">
-                                                  <i className="fab fa-linkedin-in"></i>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                                  <div className="col-md-4 box">
-                                      <ul className="list-inline quick-links">
-                                          <li className="list-inline-item">
-                                              <a href="#">Privacy Policy</a>
-                                          </li>
-                                          <li className="list-inline-item">
-                                              <a href="#">Rules and Regulations</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                    </footer>
+      <div className="footer px-5 pt-5 text-light">
+        <div className="container-fluid">
+          <footer>
+            <div className="">
+              <div className="row">
+                <div className="col-md-6 mb-4 footer-column">
+                  <ul className="nav flex-column">
+                    <li className="nav-item">
+                      <h3 className="footer-title">Company</h3>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">
+                        About us
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">
+                        News and articles
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-           </div>
-      </div>)
+                <div className="col-md-6 mb-4 footer-column">
+                  <ul className="nav flex-column">
+                    <li className="nav-item">
+                      <h3 className="footer-title">Contact & Support</h3>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">
+                        <i className="fas fa-envelope"></i>Contact us
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">
+                        <i className="fas fa-star"></i>Give feedback
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <hr />
+              <div className="row after-footer text-center pt-1 mt-4">
+                <div className="col-md-4 box">
+                  <span className="copyright quick-links">
+                    Copyright &copy; 2023, ShareCommunity{" "}
+                  </span>
+                </div>
+                <div className="col-md-4 box">
+                  <ul className="list-inline social-buttons">
+                    <li className="list-inline-item">
+                      <a href="#">
+                        <i className="fab fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li className="list-inline-item">
+                      <a href="#">
+                        <i className="fab fa-facebook-f"></i>
+                      </a>
+                    </li>
+                    <li className="list-inline-item">
+                      <a href="#">
+                        <i className="fab fa-linkedin-in"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="col-md-4 box">
+                  <ul className="list-inline quick-links">
+                    <li className="list-inline-item">
+                      <a href="#">Privacy Policy</a>
+                    </li>
+                    <li className="list-inline-item">
+                      <a href="#">Rules and Regulations</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export async function getServerSideProps(context: any) {
-    const req = context.req
-    const res = context.res
-    var email = getCookie('email', { req, res });
-    if (email == undefined){
-        email = false;
-    }
-    return { props: {email} };
-};
+  const req = context.req;
+  const res = context.res;
+  var email = getCookie("email", { req, res });
+  if (email == undefined) {
+    email = false;
+  }
+  return { props: { email } };
+}
