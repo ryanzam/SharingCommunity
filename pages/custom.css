@@ -51,6 +51,23 @@ html, body, #__next {
     background: #fdeae3;
 }
 
+.circle-border{
+    border: 1px solid rgb(255, 201, 201);
+    border-radius: 50%;
+}
+
+.border-remove{
+    border: none;
+}
+
+.list-group{
+    border-radius: 10px !important;
+}
+
+.color-text{
+    color:#ee6635 !important;
+}
+
 .footer{
     background-color: #e17853 !important;
 }
