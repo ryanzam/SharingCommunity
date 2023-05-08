@@ -14,6 +14,7 @@ export interface IUser{
     ClanCoins: number;
     UserType: UserType;
     IsVerified: boolean;
+    Avatar: string;
 }
 
 export enum UserType {

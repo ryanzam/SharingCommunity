@@ -4,6 +4,8 @@ import { UserType } from "../../models/IIModels";
 import { RandomString } from "../../util/randomstring";
 import { emailVerification } from "../../util/mailer";
 
+const avatar = ["girl1", "girl2", "man1", "man2"];
+
 export default async function registerHandler(req, res) {
     const { method, body } = req;
 
@@ -34,7 +36,8 @@ export default async function registerHandler(req, res) {
             ClanCoins: 0,
             UserType: UserType.Guest,
             UniqueStr: uniqueStr,
-            IsVerified: false
+            IsVerified: false,
+            Avatar: avatar[Math.floor(Math.random()*avatar.length)]
         }
         await db.collection("users").insertOne(bodyObject);
         emailVerification(email, uniqueStr);

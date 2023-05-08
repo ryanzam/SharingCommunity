@@ -6,7 +6,6 @@ import { Spinner } from 'reactstrap';
 import PaginateComponent from '../../components/Pagination';
 import { FaFeather } from "react-icons/fa";
 
-
 export default function Posts({email}: any) {
     const [posts, setPosts] = useState<IPost[]>([]);
     const [loading, setLoading] = useState(true);

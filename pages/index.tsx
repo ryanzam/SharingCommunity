@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaFeather, FaLink, FaBullhorn, FaMailBulk } from "react-icons/fa";
 
 import { getCookie } from "cookies-next";
 import { Badge } from "reactstrap";
-import SharingClanCarousel from "../components/Carousel";
 import Image from "next/image";
+import { IPost } from "../models/IIModels";
+
 export default function Home({ email }: any) {
+  const [featuredPosts, setFeaturedPosts] = useState<IPost[]>([]);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const res = await fetch("http://localhost:3000/api/featuredposts");
+      const data = await res.json();
+      setFeaturedPosts(data);
+    }
+    fetchPosts();
+  }, [])
+
   return (
     <div>
       <div className="main">
@@ -94,21 +106,13 @@ export default function Home({ email }: any) {
             <h3>Featured Links</h3>
             <table className="table mt-4">
               <tbody>
-                <tr className="bg-color">
-                  <th scope="row">1</th>
-                  <th>Tom Raider</th>
-                  <th>Clicks: 250</th>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <th>Mandova Proche</th>
-                  <th>Clicks: 200</th>
-                </tr>
-                <tr className="bg-color">
-                  <th scope="row">3</th>
-                  <th>Samuel Randi</th>
-                  <th>Clicks: 150</th>
-                </tr>
+                {featuredPosts.map((f: IPost, idx) => 
+                <tr className={idx %2 == 0 ? "bg-color" : ""}>
+                    <th scope="row">{idx + 1}</th>
+                    <th>{f.title}</th>
+                    <th>Clicks: {f.clicked}</th>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
