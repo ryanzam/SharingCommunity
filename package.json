@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "preinstall": "npx npm-force-resolutions"
+    "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "18.7.5",
-    "@types/react": "16.9.17",
+    "@types/react": "17.0.30",
     "typescript": "4.6.3"
   }
 }
