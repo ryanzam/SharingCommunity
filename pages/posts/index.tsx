@@ -26,10 +26,9 @@ export default function Posts({ email }: any) {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPosts, setTotalPost] = useState<number>(0);
-  const [featuredPosts, setFeaturedPosts] = useState<IPost[]>([]);
 
   const handlePreviewFetch = async (link: string) => {
-    let res = await fetch("http://localhost:3000/api/preview?link=" + link);
+    let res = await fetch("/api/preview?link=" + link);
     const data = await res.json();
     setImgPreview(data.image);
     localStorage.setItem(link, data.image);
@@ -111,7 +110,7 @@ export default function Posts({ email }: any) {
         >
           <Spinner
             className="img-preview"
-            style={{ position: "absolute", top: imgHeightY + "px" }}
+            style={{ position: "absolute", top: imgHeightY + "px", left: "150px" }}
           />
         </div>
       );
@@ -143,32 +142,44 @@ export default function Posts({ email }: any) {
   return (
     <div className="posts">
       <div className="container p-2 position-relative">
+      {hovering && <PreviewLink />}
         <div className="row">
           <div className="col-8">
-            <h2 className="my-4">Most Clicked</h2>
+            <h3 className="my-4">Featured</h3>
             <ListGroup>
-              <ListGroupItem className="bg-color list-group color-text">
-                <List type="inline">
-                  <ListInlineItem>
-                    <Image
-                      src="/../public/img/man1.png"
-                      className="img-fluid  p-2"
-                      alt="..."
-                      width={100}
-                      height={150}
-                    />
-                  </ListInlineItem>
-                  <ListInlineItem>1. Mahamad Shah</ListInlineItem>
-                  <ListInlineItem className="float-end pt-4">
-                    <span>Total Clicks: 4</span>
-                  </ListInlineItem>
+              {posts.map(p => 
+                <ListGroupItem className="bg-color list-group color-text mb-1">
+                  <List type="inline">
+                    <ListInlineItem>
+                      <Image
+                        src={`/../public/img/man2.png`}
+                        className="img-fluid  p-2"
+                        alt="..."
+                        width={100}
+                        height={150}
+                      />
+                    </ListInlineItem>
+                    <ListInlineItem>{p.title}</ListInlineItem>
+                    <ListInlineItem className="float-end pt-4">
+                      <span>Total Clicks: {p.clicked}</span>
+                    </ListInlineItem>
 
-                  <ListInlineItem className="pt-3">
-                    <FaLink />
-                  </ListInlineItem>
-                </List>
-              </ListGroupItem>
-              <ListGroupItem className="bg-color mt-2 list-group color-text">
+                    <ListInlineItem className="pt-3">
+                      <a
+                      onMouseEnter={(e) => handleMouseEnter(e, p)}
+                      onMouseLeave={handleMouseLeave}
+                      href={p.link}
+                      onClick={() => handleClick(p._id)}
+                      target="_blank"
+                    >
+                      <FaLink />
+                    </a>
+                    </ListInlineItem>
+                  </List>
+                </ListGroupItem>
+              )}
+
+              {/*<ListGroupItem className="bg-color mt-2 list-group color-text">
                 <List type="inline">
                   <ListInlineItem>
                     <Image
@@ -231,8 +242,11 @@ export default function Posts({ email }: any) {
                   </ListInlineItem>
                 </List>
               </ListGroupItem>
+              */}
             </ListGroup>
           </div>
+              
+
           <div className="col-4 p-2">
             <h3 className="my-4">Category</h3>
             <List type="unstyled">

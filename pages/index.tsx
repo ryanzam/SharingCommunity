@@ -11,7 +11,7 @@ export default function Home({ email }: any) {
 
   useEffect(() => {
     async function fetchPosts() {
-      const res = await fetch("http://localhost:3000/api/featuredposts");
+      const res = await fetch(`/api/featuredposts`);
       const data = await res.json();
       setFeaturedPosts(data);
     }
@@ -44,7 +44,6 @@ export default function Home({ email }: any) {
                   </p>
                   <p
                     className="text-primary"
-                    style={{ ["margin-bottom" as any]: "0px" }}
                   >
                     Publish, Share links and Reachout to clan
                   </p>
@@ -107,7 +106,7 @@ export default function Home({ email }: any) {
             <table className="table mt-4">
               <tbody>
                 {featuredPosts.map((f: IPost, idx) => 
-                <tr className={idx %2 == 0 ? "bg-color" : ""}>
+                <tr className={idx %2 == 0 ? "bg-color" : ""} key={idx}>
                     <th scope="row">{idx + 1}</th>
                     <th>{f.title}</th>
                     <th>Clicks: {f.clicked}</th>

@@ -9,7 +9,7 @@ export async function emailNotificationToUsers(users, post) {
             to: emailList, 
             subject: "Hello Clan Member ✔ New post on our clan", 
             text: "You are notified of new post.",
-            html: `<h2>"${post.title}" is posted by ${post.postedBy.Username} <a href="http://localhost:3000/posts">Check out posts</a></h2>`,
+            html: `<h2>"${post.title}" is posted by ${post.postedBy.Username} <a href="/posts">Check out posts</a></h2>`,
         }
 
         const transporter = nodemailer.createTransport({
@@ -39,7 +39,7 @@ export async function emailVerification(user, uniqueStr) {
             to: user, 
             subject: "Hello new Clan member ✔ Verify your email.", 
             text: "Please verify your email to be a clan member by clicking the link below.",
-            html: `Click <a href="http://localhost:3000/api/emailverify?us=${uniqueStr}">the link </a> to verify your email. :)</h2>`,
+            html: `Click <a href="/api/emailverify?us=${uniqueStr}">the link </a> to verify your email. :)</h2>`,
         }
 
         const transporter = nodemailer.createTransport({
