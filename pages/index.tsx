@@ -26,7 +26,7 @@ export default function Home({ email }: any) {
             <div className="col align-middle">
               <div className="px-2 py-2 mt-4 mb-4">
                 <Image
-                  src="/../public/img/index1.jpg"
+                  src="/images/index1.jpg"
                   className="img-fluid"
                   alt="..."
                   width={650}
@@ -117,9 +117,9 @@ export default function Home({ email }: any) {
           </div>
           <div className="col">
             <Image
-              src="/../public/img/index2.jpg"
+              src="/images/index2.jpg"
               className="img-fluid"
-              alt="..."
+              alt="index image"
               width={650}
               height={300}
             />

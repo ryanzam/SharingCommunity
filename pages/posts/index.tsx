@@ -152,7 +152,7 @@ export default function Posts({ email }: any) {
                   <List type="inline">
                     <ListInlineItem>
                       <Image
-                        src={`/../public/img/man2.png`}
+                        src={`/images/man2.png`}
                         className="img-fluid  p-2"
                         alt="..."
                         width={100}
