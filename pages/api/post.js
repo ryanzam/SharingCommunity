@@ -24,11 +24,11 @@ export default async function postHandler (req, res) {
 
         if(method == "POST")
         {
-            const { title, link } = body;            
+            const { title, category, link } = body;            
             const session = await client.startSession();
             session.startTransaction();
             const user = await db.collection("users").findOne({"Email": email});
-            const newPost = { title, link, isApproved: false, postedBy: user, clicked: 0, published: new Date() };   
+            const newPost = { title, link, isApproved: false, postedBy: user, category, clicked: 0, published: new Date() };   
             await db.collection("items").insertOne(newPost);
             session.commitTransaction();
             res.redirect("/user/dashboard?msg=Your post has been created.")

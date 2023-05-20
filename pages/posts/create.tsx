@@ -33,9 +33,22 @@ export default function CreatePost( {email}: any) {
                                 <label htmlFor="title" className="form-label mt-4">Title</label>
                                 <input type="text" className="form-control" id="title" placeholder="Enter title." name='title'  required/>
                             </div>
+                            <div className='form-group'>
+                                <label htmlFor="category" className="form-label mt-4">Category</label>
+                                <select id="category" required className="form-select" name='category'>
+                                    <option value="">Select a category</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="tiktok">Tiktok</option>
+                                    <option value="twitch">Twitch</option>
+                                    <option value="youtube">Youtube</option>
+                                    <option value="other">Other websites</option>
+                                </select>
+                            </div>
                             <div className="form-group ">
                                 <label htmlFor="link" className="form-label mt-4">Link</label>
-                                <input onChange={linkChangeHandler} type="text" className={isLinkValid ? "form-control" : "form-control is-invalid"} id="link" placeholder={link} name='link' />
+                                <input onChange={linkChangeHandler} type="text" className={isLinkValid ? "form-control" : "form-control is-invalid"} id="link" placeholder={link} name='link' required/>
                                 <div className="invalid-feedback">Sorry, that link is either invalid or insecure. Provide secure link for eg. https: //xyz.com</div>
                             </div>
                         </fieldset>
